@@ -1,0 +1,156 @@
+name: Bug Report
+description: Report a bug in the fitness app
+labels: ["bug", "needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We can only process bug reports that are actionable. Unclear bug reports or reports with insufficient information may not get attention.
+
+        Before filing a bug:
+        -------------------------
+
+        - Search existing issues, including closed issues: https://github.com/CaptainOfWell/EffortlyFit/issues?q=is%3Aissue
+        - Check if the issue occurs in the latest version of the app
+        - Try to reproduce the issue with minimal steps
+  
+  - type: dropdown
+    attributes:
+      label: App Version
+      description: What version of the fitness app are you using?
+      options:
+        - Main branch (development)
+        - Latest release
+        - v1.2.0
+        - v1.1.0  
+        - v1.0.0
+        - Pre-release (alpha/beta)
+        - Other (specify in details)
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Version Details
+      description: >
+        Required if you selected 'Main branch', 'Pre-release', or 'Other'.
+        Please provide commit SHA, exact version number, or build details.
+
+  - type: checkboxes
+    attributes:
+      label: Affected Platforms
+      description: Which platforms does this bug affect? (Select all that apply)
+      options:
+        - label: Android
+        - label: iOS
+        - label: Web
+        - label: Windows Desktop
+        - label: macOS Desktop
+        - label: Linux Desktop
+
+  - type: textarea
+    attributes:
+      label: Device Information
+      description: List devices where you can reproduce this issue
+      placeholder: |
+        Example:
+        * iPhone 14 Pro running iOS 16.4
+        * Samsung Galaxy S23 running Android 13
+        * Chrome 118 on Windows 11
+        * Desktop app on macOS Ventura 13.4
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Devices that work correctly
+      description: List devices where this issue does NOT occur (if any)
+      placeholder: |
+        Example:
+        * Pixel 7 running Android 14
+        * Safari on macOS
+
+  - type: dropdown
+    attributes:
+      label: Workout Context
+      description: When does this bug occur?
+      options:
+        - During workout creation/planning
+        - During workout execution/tracking
+        - While viewing statistics/progress
+        - During AI workout generation
+        - During data synchronization
+        - In calendar/scheduling
+        - During app startup/navigation
+        - Other (specify in reproduction steps)
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Reproduction Steps
+      description: Clear and complete steps we can follow to reproduce the problem
+      placeholder: |
+        Example:
+        1. Open the app and navigate to workout calendar
+        2. Create a new workout with 3 exercises
+        3. Set rest timer to 60 seconds
+        4. Start the workout session
+        5. Complete first exercise and start rest timer
+        6. Observe the issue occurs when timer reaches 10 seconds
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: What should happen?
+      placeholder: |
+        Example:
+        The rest timer should count down normally and play an alert sound at 0 seconds
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Actual Behavior
+      description: What actually happens? Include any error messages or unexpected behavior
+      placeholder: |
+        Example:
+        The timer freezes at 10 seconds and the app becomes unresponsive. Console shows error: "Timer service crashed with null reference exception"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Screenshots/Videos
+      description: |
+        If applicable, attach screenshots or videos to help explain the problem.
+        You can drag and drop files directly into this text area.
+
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: |
+        Any other context about the problem:
+        - Error messages from logs
+        - Network connectivity issues
+        - Recent changes to workout data
+        - AI service integration problems
+        - Data synchronization conflicts
+        
+        For backend-related issues, include relevant API responses or database errors.
+        For mobile issues, include device orientation, background app behavior, etc.
+
+  - type: checkboxes
+    attributes:
+      label: Logs and Diagnostics
+      description: |
+        To help diagnose the issue, please gather relevant logs:
+        
+        **For mobile apps:** Check device logs and app crash reports
+        **For web app:** Check browser console for JavaScript errors  
+        **For desktop apps:** Check application logs in the app data directory
+        **For backend issues:** Check API server logs if accessible
+      options:
+        - label: I have checked the relevant logs and will include important error messages in the issue description
