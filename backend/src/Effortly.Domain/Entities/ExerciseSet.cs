@@ -16,7 +16,7 @@ public class ExerciseSet : BaseEntity
     public DateTime CompletedAt { get; set; }
     public int? RestAfter { get; set; } // seconds
     public string? Notes { get; set; }
-    
+
     // Navigation properties
     public WorkoutSession Session { get; set; } = null!;
     public Exercise Exercise { get; set; } = null!;

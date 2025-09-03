@@ -11,7 +11,7 @@ public class PersonalRecord : BaseEntity
     public string Unit { get; set; } = string.Empty;
     public DateTime AchievedOn { get; set; }
     public Guid? SessionId { get; set; }
-    
+
     // Navigation properties
     public User User { get; set; } = null!;
     public Exercise Exercise { get; set; } = null!;

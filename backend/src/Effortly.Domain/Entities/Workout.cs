@@ -11,7 +11,7 @@ public class Workout : AuditableEntity
     public int EstimatedDuration { get; set; } // minutes
     public bool IsTemplate { get; set; }
     public string? Tags { get; set; } // comma-separated
-    
+
     // Navigation properties
     public User User { get; set; } = null!;
     public ICollection<WorkoutExercise> WorkoutExercises { get; set; } = new List<WorkoutExercise>();

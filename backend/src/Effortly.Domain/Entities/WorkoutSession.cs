@@ -15,7 +15,7 @@ public class WorkoutSession : AuditableEntity
     public int? Duration { get; set; } // seconds
     public string? Notes { get; set; }
     public bool NeedsSync { get; set; }
-    
+
     // Navigation properties
     public User User { get; set; } = null!;
     public Workout? Workout { get; set; }

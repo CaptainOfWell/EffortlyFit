@@ -11,7 +11,7 @@ public class BodyMetric : BaseEntity
     public decimal? MuscleMass { get; set; }
     public Dictionary<string, decimal> Measurements { get; set; } = new(); // chest, arms, waist, etc.
     public string? Notes { get; set; }
-    
+
     // Navigation properties
     public User User { get; set; } = null!;
 }

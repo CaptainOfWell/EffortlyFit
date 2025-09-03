@@ -13,7 +13,7 @@ public class WorkoutExercise : BaseEntity
     public int? PlannedDuration { get; set; } // seconds
     public int? RestTime { get; set; } // seconds
     public string? Notes { get; set; }
-    
+
     // Navigation properties
     public Workout Workout { get; set; } = null!;
     public Exercise Exercise { get; set; } = null!;
