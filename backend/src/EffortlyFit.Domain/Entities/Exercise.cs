@@ -1,31 +1,45 @@
-﻿using EffortlyFit.Domain.Common;
-using EffortlyFit.Domain.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using EffortlyFit.Domain.Entities.Workouts;
 
 namespace EffortlyFit.Domain.Entities;
 
-public class Exercise : BaseEntity
+public class Exercise
 {
+    [Key]
+    [StringLength(200)]
+    public string Id { get; set; } = string.Empty;
+
+    [Required]
+    [StringLength(300)]
     public string Name { get; set; } = string.Empty;
-    public string? Description { get; set; }
 
-    public ForceType? Force { get; set; }          // static, push, pull
-    public DifficultyLevel Level { get; set; }     // beginner, intermediate, expert
-    public MechanicType? Mechanic { get; set; }    // isolation, compound
-    public EquipmentType? Equipment { get; set; }
+    [StringLength(20)]
+    public string? Force { get; set; } // static, pull, push
 
-    public List<MuscleGroup> PrimaryMuscleGroups { get; set; } = new();
-    public List<MuscleGroup> SecondaryMuscleGroups { get; set; } = new();
+    [Required]
+    [StringLength(20)]
+    public string Level { get; set; } = string.Empty; // beginner, intermediate, expert
 
-    public ExerciseCategory Category { get; set; }
+    [StringLength(20)]
+    public string? Mechanic { get; set; } // isolation, compound
 
-    public List<string> Instructions { get; set; } = new();
-    public List<string> Images { get; set; } = new();
+    [StringLength(50)]
+    public string? Equipment { get; set; } // dumbbell, barbell, body only, etc.
 
-    public string? VideoUrl { get; set; }
-    public bool IsCustom { get; set; }
-    public Guid? CreatedByUserId { get; set; }
+    [Required]
+    [StringLength(50)]
+    public string Category { get; set; } = string.Empty; // strength, cardio, stretching, etc.
+
+    // Store as JSON strings for flexibility
+    public string PrimaryMuscles { get; set; } = "[]"; // JSON array of muscle groups
+    public string SecondaryMuscles { get; set; } = "[]"; // JSON array of muscle groups
+    public string Instructions { get; set; } = "[]"; // JSON array of instruction steps
+    public string Images { get; set; } = "[]"; // JSON array of image paths
+
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
     // Navigation properties
-    public User? CreatedByUser { get; set; }
-    public ICollection<WorkoutExercise> WorkoutExercises { get; set; } = new List<WorkoutExercise>();
+    public virtual ICollection<WorkoutExercise> WorkoutExercises { get; set; } = new List<WorkoutExercise>();
+    public virtual ICollection<WorkoutSessionExercise> WorkoutSessionExercises { get; set; } = new List<WorkoutSessionExercise>();
 }
