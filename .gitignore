@@ -50,8 +50,7 @@ nunit-*.xml
 TestResults/
 
 # Configuration and Environment files
-*.env
-*.env.local
+# *.env
 appsettings.*.local.json
 appsettings.local.json
 
