@@ -51,7 +51,7 @@ TestResults/
 
 # Configuration and Environment files
 *.env
-*.env.local
+*.env.development
 appsettings.*.local.json
 appsettings.local.json
 

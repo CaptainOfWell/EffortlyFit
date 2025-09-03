@@ -1,0 +1,6 @@
+@Effortly.API_HostAddress = http://localhost:5046
+
+GET {{Effortly.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
