@@ -10,15 +10,17 @@ help:
 	@echo "  make clean       - Clean all build artifacts"
 
 dev-up:
-	docker-compose -f docker-compose.dev.yml up -d
+	docker-compose --env-file .env.development -f docker-compose.dev.yml up -d
 	@echo "Waiting for PostgreSQL to be ready..."
 	@sleep 5
 	@echo "Development environment is ready!"
 	@echo "PostgreSQL: localhost:5432"
 	@echo "Redis: localhost:6379"
+	@echo "Database: effortlyfit_dev"
+	@echo "User: effortly_dev"
 
 dev-down:
-	docker-compose -f docker-compose.dev.yml down
+	docker-compose --env-file .env.development -f docker-compose.dev.yml down
 
 migrate:
 	cd backend && dotnet ef database update -p src/Effortly.Infrastructure -s src/Effortly.API
