@@ -163,6 +163,40 @@ docker-compose.local.yml
 # Local deployment scripts
 deploy.local.*
 
+##################################
+#       POSTGRESQL               #
+##################################
+
+# Local database files
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# PostgreSQL dump files (optional)
+*.sql
+*.dump
+
+# Local Postgres data directories (if used locally)
+pgdata/
+data/
+
+# PostgreSQL credentials/config
+pg_hba.conf
+postgresql.conf
+
+##################################
+#       NGINX                    #
+##################################
+
+# Nginx logs
+logs/
+*.log
+
+# Nginx cache
+cache/
+
 
 ##################################
 #       SECURITY & SECRETS       #
