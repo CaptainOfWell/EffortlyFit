@@ -2,6 +2,7 @@ using Effortly.Infrastructure;
 using Effortly.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Scalar.AspNetCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,9 +24,20 @@ builder.Configuration
 // Add services to the container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
+
+// Configure OpenAPI/Swagger for Scalar
+builder.Services.AddOpenApi(options =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "EffortlyFit API", Version = "v1" });
+    options.AddDocumentTransformer((document, effortlyDbContext, cancellationToken) =>
+    {
+        document.Info = new OpenApiInfo
+        {
+            Title = "Effortly API",
+            Version = "v1",
+            Description = "API documentation for the EffortlyFit application.",
+        };
+        return Task.CompletedTask;
+    });
 });
 
 // Add Infrastructure services
@@ -50,8 +62,19 @@ var app = builder.Build();
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    // Map OpenAPI endpoint
+    app.MapOpenApi();
+
+    // Use Scalar for API documentation
+    app.MapScalarApiReference(options =>
+    {
+        options
+            .WithTitle("Effortly API")
+            .WithTheme(ScalarTheme.Purple)
+            .WithDarkModeToggle(true)
+            .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient)
+            .WithEndpointPrefix("/scalar/{documentName}");
+    });
     app.UseCors("DevelopmentCors");
 }
 
@@ -74,5 +97,9 @@ if (app.Environment.IsDevelopment())
     }
 }
 
+// Redirect root to API docs
+app.MapGet("/", () => Results.Redirect("/scalar/v1")).ExcludeFromDescription();
+
 Log.Information("Starting EffortlyFit API");
+Log.Information("API Documentation available at: https://localhost:7159/scalar/v1");
 app.Run();
